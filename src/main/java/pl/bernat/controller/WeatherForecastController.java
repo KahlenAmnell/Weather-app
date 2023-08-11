@@ -3,8 +3,12 @@ package pl.bernat.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import pl.bernat.model.Cities;
+import pl.bernat.view.ViewFactory;
 
-public class WeatherForecastController {
+import java.util.ArrayList;
+
+public class WeatherForecastController extends BaseController {
     @FXML
     private ImageView editMainButton;
 
@@ -35,11 +39,13 @@ public class WeatherForecastController {
     @FXML
     private Label mainWindSpeedLabel;
 
+    public WeatherForecastController(ArrayList<Cities> citiesList, ViewFactory viewFactory, String fxmlName) {
+        super(citiesList, viewFactory, fxmlName);
+    }
+
     @FXML
     void editMainButton() {
 
     }
 
-    public WeatherForecastController() {
-    }
 }

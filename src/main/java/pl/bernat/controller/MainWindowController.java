@@ -6,19 +6,25 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import pl.bernat.model.Cities;
+import pl.bernat.view.ViewFactory;
 
-public class MainWindowController {
+import java.util.ArrayList;
+
+public class MainWindowController extends BaseController {
 
     @FXML
     private Label closeLabel;
     @FXML
     private HBox weatherForecastSpace;
 
+    public MainWindowController(ArrayList<Cities> citiesList, ViewFactory viewFactory, String fxmlName) {
+        super(citiesList, viewFactory, fxmlName);
+    }
+
     @FXML
     void closeAction() {
 
     }
 
-    public MainWindowController() {
-    }
 }
