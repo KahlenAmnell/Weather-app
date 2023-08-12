@@ -1,8 +1,11 @@
 package pl.bernat.controller;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import pl.bernat.model.Cities;
 import pl.bernat.view.ViewFactory;
 
@@ -39,6 +42,12 @@ public class WeatherForecastController extends BaseController {
     @FXML
     private Label mainWindSpeedLabel;
 
+    @FXML
+    private AnchorPane weatherForecastAnchorPane;
+
+    @FXML
+    private HBox weatherForecastHBox;
+
     public WeatherForecastController(ArrayList<Cities> citiesList, ViewFactory viewFactory, String fxmlName) {
         super(citiesList, viewFactory, fxmlName);
     }
@@ -46,6 +55,9 @@ public class WeatherForecastController extends BaseController {
     @FXML
     void editMainButton() {
 
+    }
+    public void setAnchorPaneMargin(){
+        HBox.setMargin(weatherForecastAnchorPane, new Insets(0, 20, 0,0));
     }
 
 }

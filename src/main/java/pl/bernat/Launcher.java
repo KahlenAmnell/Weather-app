@@ -21,12 +21,15 @@ public class Launcher extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+/*        citiesList.add(new Cities("a", "a"));
+        citiesList.add(new Cities("a", "a"));*/
         ViewFactory viewFactory = new ViewFactory(citiesList);
         viewFactory.showMainWindow();
     }
 
 
     public static void main(String[] args) {
+
         launch();
     }
 

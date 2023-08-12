@@ -1,7 +1,6 @@
 package pl.bernat.view;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pl.bernat.controller.BaseController;
@@ -25,24 +24,34 @@ public class ViewFactory {
         BaseController controller = new MainWindowController(citiesList, this, "/FXMLFiles/MainWindow.fxml");
         initializeStage(controller);
     }
-    private void initializeStage(BaseController baseController) throws IOException {
-        FXMLLoader mainWindow = new FXMLLoader(getClass().getResource("/FXMLFiles/MainWindow.fxml"));
-        mainWindow.setController(baseController);
-        Parent parent;
-        try{
-            parent = mainWindow.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-        Scene scene = new Scene(parent);
 
-        URL weatherForecast = getClass().getResource("/FXMLFiles/WeatherForecast.fxml");
-        FXMLLoader weatherForecastLoader = new FXMLLoader(weatherForecast);
-        weatherForecastLoader.setController(new WeatherForecastController(citiesList, this, "/FXMLFiles/WeatherForecast.fxml"));
+    private void initializeWeatherForecastWindows(FXMLLoader weatherForecastLoader, WeatherForecastController controller) throws IOException {
+        int i=citiesList.size();
+
+        do {
+            weatherForecastLoader.load();
+            i--;
+            if(i >= 1){
+                controller.setAnchorPaneMargin();
+            }
+        } while (i > 0);
+    }
+    private FXMLLoader setFxmlLoader(BaseController controller){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(controller.getFxmlName()));
+        loader.setController(controller);
+        return loader;
+    }
+    private void initializeStage(BaseController baseController) throws IOException {
+        FXMLLoader mainWindow = setFxmlLoader(baseController);
+
+        Scene scene = new Scene(mainWindow.load());
+
+        WeatherForecastController weatherController = new WeatherForecastController(citiesList, this, "/FXMLFiles/WeatherForecast.fxml");
+        FXMLLoader weatherForecastLoader = setFxmlLoader(weatherController);
 
         weatherForecastLoader.setRoot(mainWindow.getNamespace().get("weatherForecastSpace"));
-        weatherForecastLoader.load();
+
+        initializeWeatherForecastWindows(weatherForecastLoader, weatherController);
 
         Stage stage = new Stage();
         stage.setScene(scene);

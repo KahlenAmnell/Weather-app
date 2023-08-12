@@ -12,8 +12,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <AnchorPane prefHeight="200.0" prefWidth="200.0">
+<fx:root fx:id="weatherForecastHBox" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <AnchorPane fx:id="weatherForecastAnchorPane" prefHeight="200.0" prefWidth="200.0">
       <children>
       <Pane prefHeight="550.0" prefWidth="385.0" style="-fx-background-color: #0077B6;">
          <children>
@@ -87,5 +87,8 @@
          </children>
       </Pane>
       </children>
+      <HBox.margin>
+         <Insets />
+      </HBox.margin>
    </AnchorPane>
 </fx:root>
