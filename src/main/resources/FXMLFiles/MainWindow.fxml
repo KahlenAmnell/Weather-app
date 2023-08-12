@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="550.0" prefWidth="420.0" style="-fx-background-color: #011638;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane layoutX="764.0" prefHeight="550.0" prefWidth="420.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <Label fx:id="closeLabel" onMouseClicked="#closeAction" text="x" textFill="WHITE" BorderPane.alignment="CENTER_RIGHT">
+               <font>
+                  <Font size="25.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets right="5.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
+         <right>
+            <Label alignment="CENTER_RIGHT" prefHeight="478.0" prefWidth="36.0" text="+" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
+         </right>
+         <bottom>
+            <Pane prefHeight="36.0" prefWidth="36.0" BorderPane.alignment="CENTER" />
+         </bottom>
+         <left>
+            <Pane prefHeight="200.0" prefWidth="36.0" BorderPane.alignment="CENTER" />
+         </left>
+         <center>
+            <HBox fx:id="weatherForecastSpace" prefHeight="550.0" prefWidth="385.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
