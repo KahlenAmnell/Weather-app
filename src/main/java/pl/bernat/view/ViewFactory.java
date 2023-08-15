@@ -6,17 +6,15 @@ import javafx.stage.Stage;
 import pl.bernat.controller.BaseController;
 import pl.bernat.controller.MainWindowController;
 import pl.bernat.controller.WeatherForecastController;
-import pl.bernat.model.Cities;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class ViewFactory {
     private ArrayList<Stage> activeStages;
-    private ArrayList<Cities> citiesList;
+    private ArrayList<String> citiesList;
 
-    public ViewFactory(ArrayList<Cities> citiesList) {
+    public ViewFactory(ArrayList<String> citiesList) {
         this.citiesList = citiesList;
         activeStages = new ArrayList<Stage>();
     }
