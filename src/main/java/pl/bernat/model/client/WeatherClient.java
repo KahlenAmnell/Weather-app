@@ -1,7 +1,7 @@
 package pl.bernat.model.client;
 
-import pl.bernat.model.Weather;
+import pl.bernat.model.WeatherApi;
 
 public interface WeatherClient {
-    Weather getWeather(String cityName);
+    WeatherApi getWeather(String cityName);
 }

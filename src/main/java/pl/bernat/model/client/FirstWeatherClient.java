@@ -1,10 +1,10 @@
 package pl.bernat.model.client;
 
-import pl.bernat.model.Weather;
+import pl.bernat.model.WeatherApi;
 
 public class FirstWeatherClient implements WeatherClient{
     @Override
-    public Weather getWeather(String cityName) {
-        return new Weather();
+    public WeatherApi getWeather(String cityName) {
+        return new WeatherApi();
     }
 }

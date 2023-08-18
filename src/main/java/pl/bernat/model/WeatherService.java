@@ -1,6 +1,5 @@
 package pl.bernat.model;
 
-import pl.bernat.model.client.FirstWeatherClient;
 import pl.bernat.model.client.WeatherClient;
 
 public class WeatherService {
@@ -10,7 +9,7 @@ public class WeatherService {
         this.weatherClient = weatherClient;
     }
 
-    public Weather getWeather(String cityName){
+    public WeatherApi getWeather(String cityName){
         return weatherClient.getWeather(cityName);
     }
 }
