@@ -1,4 +1,4 @@
-package pl.bernat.model;
+package pl.bernat.model.client;
 import com.google.gson.annotations.SerializedName;
 
 public class WeatherApi {
