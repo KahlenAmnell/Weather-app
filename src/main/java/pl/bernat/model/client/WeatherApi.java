@@ -13,7 +13,7 @@ public class WeatherApi {
         String date;
         public class Main{
             @SerializedName("temp")
-            int temperature;
+            double temperature;
             @SerializedName("pressure")
             int pressure;
             @SerializedName("humidity")
