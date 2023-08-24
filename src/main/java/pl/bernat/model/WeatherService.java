@@ -10,7 +10,7 @@ public class WeatherService {
         this.weatherClient = weatherClient;
     }
 
-    public WeatherApi getWeather(String cityName) throws Exception {
+    public WeatherApi getWeather(String cityName) {
         return weatherClient.getWeather(cityName);
     }
 }

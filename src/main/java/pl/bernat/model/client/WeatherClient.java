@@ -1,5 +1,5 @@
 package pl.bernat.model.client;
 
 public interface WeatherClient {
-    WeatherApi getWeather(String cityName) throws Exception;
+    WeatherApi getWeather(String cityName);
 }
