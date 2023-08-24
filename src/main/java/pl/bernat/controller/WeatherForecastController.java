@@ -11,6 +11,15 @@ import pl.bernat.view.ViewFactory;
 import java.util.ArrayList;
 
 public class WeatherForecastController extends BaseController {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private int id;
     @FXML
     private ImageView editMainButton;
 
@@ -44,9 +53,7 @@ public class WeatherForecastController extends BaseController {
     @FXML
     private AnchorPane weatherForecastAnchorPane;
 
-    public void setMainCityName(String cityName) {
-        mainCityNameLabel.setText(cityName);
-    }
+
 
     @FXML
     private HBox weatherForecastHBox;
@@ -54,10 +61,16 @@ public class WeatherForecastController extends BaseController {
     public WeatherForecastController(ArrayList<String> citiesList, ViewFactory viewFactory, String fxmlName) {
         super(citiesList, viewFactory, fxmlName);
     }
+    public void setMainCityName(String cityName) {
+        mainCityNameLabel.setText(cityName);
+    }
+    public String getMainCityName(){
+        return mainCityNameLabel.getText();
+    }
 
     @FXML
     void editMainButton() {
-        viewFactory.showCitySelectorWindow();
+        viewFactory.showCitySelectorWindow(id);
     }
     public void setAnchorPaneMargin(){
         HBox.setMargin(weatherForecastAnchorPane, new Insets(0, 20, 0,0));
