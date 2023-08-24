@@ -26,8 +26,6 @@ public class FirstWeatherClient implements WeatherClient{
 
             Gson gson = new Gson();
             obj = gson.fromJson(result, WeatherApi.class);
-            System.out.println("Temperature: " + obj.list[0].main.temperature);
-            System.out.println("Wind speed: " + obj.list[0].wind.speed);
         } catch(IOException e){
             e.printStackTrace();
         } catch (URISyntaxException e) {

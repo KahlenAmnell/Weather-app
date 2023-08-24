@@ -14,9 +14,7 @@ public class Launcher extends Application {
     private ArrayList<String> citiesList = new ArrayList<String>();
 
     @Override
-    public void start(Stage stage) throws Exception {
-/*        citiesList.add(new Cities("a", "a"));
-        citiesList.add(new Cities("a", "a"));*/
+    public void start(Stage stage) {
         WeatherService weatherService = WeatherServiceFactory.createWeatherService();
         weatherService.getWeather("Gdańsk");
 

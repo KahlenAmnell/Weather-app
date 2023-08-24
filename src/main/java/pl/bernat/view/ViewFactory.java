@@ -1,5 +1,6 @@
 package pl.bernat.view;
 
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,7 +25,7 @@ public class ViewFactory {
         BaseController controller = new MainWindowController(citiesList, this, "/FXMLFiles/MainWindow.fxml");
         initializeStage(controller);
     }
-    public void citySelectorWindow(){
+    public void showCitySelectorWindow(){
         BaseController controller = new CitySelectorController(citiesList, this, "/FXMLFiles/CitySelectorWindow.fxml");
         initializeStage(controller);
     }
@@ -36,7 +37,12 @@ try {
         weatherForecastLoader.load();
         i--;
         if (i >= 1) {
+            controller.setMainCityName(citiesList.get(i));
             controller.setAnchorPaneMargin();
+        } else {
+            Platform.runLater(() -> {
+                showCitySelectorWindow();
+            });
         }
     } while (i > 0);
 } catch (IOException e){

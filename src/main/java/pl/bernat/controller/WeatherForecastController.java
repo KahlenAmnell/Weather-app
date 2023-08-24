@@ -44,6 +44,10 @@ public class WeatherForecastController extends BaseController {
     @FXML
     private AnchorPane weatherForecastAnchorPane;
 
+    public void setMainCityName(String cityName) {
+        mainCityNameLabel.setText(cityName);
+    }
+
     @FXML
     private HBox weatherForecastHBox;
 
@@ -53,7 +57,7 @@ public class WeatherForecastController extends BaseController {
 
     @FXML
     void editMainButton() {
-        viewFactory.citySelectorWindow();
+        viewFactory.showCitySelectorWindow();
     }
     public void setAnchorPaneMargin(){
         HBox.setMargin(weatherForecastAnchorPane, new Insets(0, 20, 0,0));
