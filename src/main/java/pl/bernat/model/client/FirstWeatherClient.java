@@ -13,10 +13,11 @@ public class FirstWeatherClient implements WeatherClient{
     @Override
     public WeatherApi getWeather(String cityName){
         WeatherApi obj = new WeatherApi();
+        String request = "https://api.openweathermap.org/data/2.5/forecast?appid=609312d806745e844f4bff56016e6b13&units=metric&cnt=1" + "&q=" + cityName;
 
         try {
             HttpRequest httpRequest = HttpRequest.newBuilder()
-                    .uri(new URI("https://api.openweathermap.org/data/2.5/forecast?appid=609312d806745e844f4bff56016e6b13&q=Brenna&units=metric&cnt=1"))
+                    .uri(new URI(request))
                     .build();
 
             HttpClient httpClient = HttpClient.newHttpClient();

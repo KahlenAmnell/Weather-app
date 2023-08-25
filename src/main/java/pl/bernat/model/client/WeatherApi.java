@@ -13,9 +13,6 @@ public class WeatherApi {
     }
     public class List{
         Main main;
-
-
-
         Weather weather[];
         Clouds clouds;
         Wind wind;
@@ -48,16 +45,16 @@ public class WeatherApi {
 
             @SerializedName("humidity")
             int humidity;
-            public double getTemperature() {
-                return temperature;
+            public String getTemperature() {
+                return (int) Math.round(temperature)+"";
             }
 
-            public int getPressure() {
-                return pressure;
+            public String getPressure() {
+                return pressure+"";
             }
 
-            public int getHumidity() {
-                return humidity;
+            public String getHumidity() {
+                return humidity+"";
             }
 
         }
@@ -72,16 +69,16 @@ public class WeatherApi {
             @SerializedName("all")
             int cloudiness;
 
-            public int getCloudiness() {
-                return cloudiness;
+            public String getCloudiness() {
+                return cloudiness+"";
             }
         }
         public class Wind{
             @SerializedName("speed")
             double speed;
 
-            public double getSpeed() {
-                return speed;
+            public String getSpeed() {
+                return speed+"";
             }
         }
 

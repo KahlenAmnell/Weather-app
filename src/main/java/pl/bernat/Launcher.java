@@ -15,9 +15,9 @@ public class Launcher extends Application {
 
     @Override
     public void start(Stage stage) {
-        WeatherService weatherService = WeatherServiceFactory.createWeatherService();
-        weatherService.getWeather("Gdańsk");
-
+        citiesList.add("Gdańsk");
+        citiesList.add("Dobrzykowice");
+        citiesList.add("Brenna");
         ViewFactory viewFactory = new ViewFactory(citiesList);
         viewFactory.showMainWindow();
     }

@@ -29,7 +29,7 @@ public class CitySelectorController extends BaseController{
 
     @FXML
     public void saveCityAction() {
-        viewFactory.updateCity(forecastId, cityTextField.getText());
+        viewFactory.updateCity(forecastId, getCityName());
         closeAction();
     }
 

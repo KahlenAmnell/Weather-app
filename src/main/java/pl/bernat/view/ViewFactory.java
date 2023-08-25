@@ -40,15 +40,16 @@ try {
         weatherForecastLoader.load();
         controller.setId(forecasts.size());
         forecasts.add(controller);
-        i--;
         if (i >= 1) {
-            controller.setMainCityName(citiesList.get(i));
+            controller.setMainCityName(citiesList.get(i-1));
             controller.setAnchorPaneMargin();
+            controller.checkWeather();
         } else {
             Platform.runLater(() -> {
                 showCitySelectorWindow(controller.getId());
             });
         }
+        i--;
     } while (i > 0);
 } catch (IOException e){
     e.printStackTrace();
@@ -98,6 +99,7 @@ try {
         for(WeatherForecastController forecast: forecasts){
             if(forecast.getId() == forecastId){
                 forecast.setMainCityName(cityName);
+                forecast.checkWeather();
             }
         }
     }
