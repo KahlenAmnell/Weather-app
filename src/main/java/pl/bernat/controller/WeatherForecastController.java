@@ -78,6 +78,7 @@ public class WeatherForecastController extends BaseController implements Initial
 
     @FXML
     void editMainButton() {
+        System.out.println(id);
         viewFactory.showCitySelectorWindow(id);
     }
     public void setAnchorPaneMargin(){
@@ -101,6 +102,6 @@ public class WeatherForecastController extends BaseController implements Initial
         mainCityTemperatureLabel.setText(weather.getList()[0].getMain().getTemperature() + "°C");
         mainHumidityLabel.setText("Wilgotność: " + weather.getList()[0].getMain().getHumidity() + "%");
         mainWindSpeedLabel.setText("Szybkość wiatru: " + weather.getList()[0].getWind().getSpeed() + "m/s");
-
+        mainNightTemperatureLabel.setText("id: " + id);
     }
 }

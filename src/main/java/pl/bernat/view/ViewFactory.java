@@ -29,16 +29,14 @@ public class ViewFactory {
         initializeStage(controller);
     }
     public void showCitySelectorWindow(int forecastId){
-        BaseController controller = new CitySelectorController(citiesList, this, "/FXMLFiles/CitySelectorWindow.fxml");
+        BaseController controller = new CitySelectorController(citiesList, this, "/FXMLFiles/CitySelectorWindow.fxml", forecastId);
         initializeStage(controller);
     }
 
-    private void initializeWeatherForecastWindows(FXMLLoader weatherForecastLoader, WeatherForecastController controller){
-        int i=citiesList.size();
+    private void initializeWeatherForecastWindows(FXMLLoader weatherForecastLoader, WeatherForecastController controller, int i){
 try {
-    do {
         weatherForecastLoader.load();
-        controller.setId(forecasts.size());
+        controller.setId(i);
         forecasts.add(controller);
         if (i >= 1) {
             controller.setMainCityName(citiesList.get(i-1));
@@ -49,8 +47,6 @@ try {
                 showCitySelectorWindow(controller.getId());
             });
         }
-        i--;
-    } while (i > 0);
 } catch (IOException e){
     e.printStackTrace();
 }
@@ -67,7 +63,11 @@ try {
         try {
             parent = window.load();
             if(baseController.getClass() == MainWindowController.class){
-                setForecastWindows(window);
+                int i=citiesList.size();
+                do {
+                    setForecastWindows(window, i);
+                    i--;
+                } while (i > 0);
             }
         } catch (IOException e){
             e.printStackTrace();
@@ -86,18 +86,19 @@ try {
         activeStages.remove(stageToClose);
     }
 
-    private void setForecastWindows(FXMLLoader mainWindow) throws IOException {
+    private void setForecastWindows(FXMLLoader mainWindow, int i) throws IOException {
         WeatherForecastController weatherController = new WeatherForecastController(citiesList, this, "/FXMLFiles/WeatherForecast.fxml");
         FXMLLoader weatherForecastLoader = setFxmlLoader(weatherController);
 
         weatherForecastLoader.setRoot(mainWindow.getNamespace().get("weatherForecastSpace"));
 
-        initializeWeatherForecastWindows(weatherForecastLoader, weatherController);
+        initializeWeatherForecastWindows(weatherForecastLoader, weatherController, i);
     }
 
     public void updateCity(int forecastId, String cityName) {
         for(WeatherForecastController forecast: forecasts){
-            if(forecast.getId() == forecastId){
+            int id = forecast.getId();
+            if(id == forecastId){
                 forecast.setMainCityName(cityName);
                 forecast.checkWeather();
             }
