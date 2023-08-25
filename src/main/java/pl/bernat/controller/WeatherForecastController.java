@@ -9,7 +9,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import pl.bernat.model.WeatherService;
 import pl.bernat.model.WeatherServiceFactory;
-import pl.bernat.model.client.FirstWeatherClient;
 import pl.bernat.model.client.WeatherApi;
 import pl.bernat.view.ViewFactory;
 
@@ -24,37 +23,35 @@ public class WeatherForecastController extends BaseController implements Initial
     private ImageView editMainButton;
 
     @FXML
-    private Label mainCityDateLabel;
+    private Label dateLabel;
 
     @FXML
-    private Label mainCityNameLabel;
+    private Label cityNameLabel;
 
     @FXML
-    private Label mainCityTemperatureLabel;
+    private Label temperatureLabel;
 
     @FXML
-    private ImageView mainCityWeatherIcon;
+    private ImageView weatherIcon;
 
     @FXML
-    private Label mainCountryNameLabel;
+    private Label humidityLabel;
 
     @FXML
-    private Label mainHumidityLabel;
+    private Label pressureLabel;
 
     @FXML
-    private Label mainNightTemperatureLabel;
+    private Label cloudinessLabel;
 
     @FXML
-    private Label mainPrecipitationProbabilityLabel;
+    private Label windSpeedLabel;
 
     @FXML
-    private Label mainWindSpeedLabel;
+    private  Label descriptionLabel;
 
     @FXML
     private AnchorPane weatherForecastAnchorPane;
     private WeatherService weatherService = WeatherServiceFactory.createWeatherService();
-
-
 
     @FXML
     private HBox weatherForecastHBox;
@@ -63,10 +60,10 @@ public class WeatherForecastController extends BaseController implements Initial
         super(citiesList, viewFactory, fxmlName);
     }
     public void setMainCityName(String cityName) {
-        mainCityNameLabel.setText(cityName);
+        cityNameLabel.setText(cityName);
     }
     public String getMainCityName(){
-        return mainCityNameLabel.getText();
+        return cityNameLabel.getText();
     }
     public int getId() {
         return id;
@@ -78,7 +75,6 @@ public class WeatherForecastController extends BaseController implements Initial
 
     @FXML
     void editMainButton() {
-        System.out.println(id);
         viewFactory.showCitySelectorWindow(id);
     }
     public void setAnchorPaneMargin(){
@@ -97,11 +93,13 @@ public class WeatherForecastController extends BaseController implements Initial
     }
 
     private void displayWeather(WeatherApi weather) {
-        mainCityNameLabel.setText(weather.getCity().getName());
-        mainCityDateLabel.setText(weather.getList()[0].getDate());
-        mainCityTemperatureLabel.setText(weather.getList()[0].getMain().getTemperature() + "°C");
-        mainHumidityLabel.setText("Wilgotność: " + weather.getList()[0].getMain().getHumidity() + "%");
-        mainWindSpeedLabel.setText("Szybkość wiatru: " + weather.getList()[0].getWind().getSpeed() + "m/s");
-        mainNightTemperatureLabel.setText("id: " + id);
+        cityNameLabel.setText(weather.getCity().getName());
+        dateLabel.setText(weather.getList()[0].getDate());
+        temperatureLabel.setText(weather.getList()[0].getMain().getTemperature() + "°C");
+        humidityLabel.setText("Wilgotność: " + weather.getList()[0].getMain().getHumidity() + "%");
+        windSpeedLabel.setText("Wiatr: " + weather.getList()[0].getWind().getSpeed() + " m/s");
+        pressureLabel.setText("Ciśnienie: " + weather.getList()[0].getMain().getPressure() + " hPa");
+        cloudinessLabel.setText("Zachmurzenie: " + weather.getList()[0].getClouds().getCloudiness() + "%");
+        descriptionLabel.setText(weather.getList()[0].getWeather()[0].getDescription());
     }
 }
