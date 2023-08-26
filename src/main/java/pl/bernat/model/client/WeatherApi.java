@@ -64,6 +64,9 @@ public class WeatherApi {
             public String getDescription() {
                 return description;
             }
+            @SerializedName("icon")
+            String icon;
+            public String getIcon(){return icon;}
         }
         public class Clouds{
             @SerializedName("all")

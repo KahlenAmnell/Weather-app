@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -82,7 +83,6 @@ public class WeatherForecastController extends BaseController implements Initial
     }
 
     public void checkWeather() {
-        String name = getMainCityName();
         WeatherApi weather = weatherService.getWeather(getMainCityName());
         displayWeather(weather);
     }
@@ -101,5 +101,6 @@ public class WeatherForecastController extends BaseController implements Initial
         pressureLabel.setText("Ciśnienie: " + weather.getList()[0].getMain().getPressure() + " hPa");
         cloudinessLabel.setText("Zachmurzenie: " + weather.getList()[0].getClouds().getCloudiness() + "%");
         descriptionLabel.setText(weather.getList()[0].getWeather()[0].getDescription());
+        weatherIcon.setImage(new Image("http://openweathermap.org/img/w/"+ weather.getList()[0].getWeather()[0].getIcon() + ".png"));
     }
 }
