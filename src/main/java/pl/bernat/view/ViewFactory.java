@@ -18,6 +18,7 @@ public class ViewFactory {
     private ArrayList<WeatherForecastController> forecasts;
     private ArrayList<Stage> activeStages;
     private ArrayList<String> citiesList;
+    private MainWindowController mainWindow;
 
     public ViewFactory(ArrayList<String> citiesList) {
         this.citiesList = citiesList;
@@ -63,6 +64,7 @@ try {
         try {
             parent = window.load();
             if(baseController.getClass() == MainWindowController.class){
+                mainWindow = (MainWindowController) baseController;
                 int i=citiesList.size();
                 do {
                     setForecastWindows(window, i);
@@ -73,7 +75,6 @@ try {
             e.printStackTrace();
             return;
         }
-
         Scene scene = new Scene(parent);
         Stage stage = new Stage();
         stage.setScene(scene);
@@ -103,5 +104,19 @@ try {
                 forecast.checkWeather();
             }
         }
+    }
+
+    public void closeForecast(int id, Stage stage) {
+        if(forecasts.size()>1) {
+            for (WeatherForecastController forecast : forecasts) {
+                if (id == forecast.getId()) {
+                    mainWindow.getWeatherForecastSpace().getChildren().remove(forecast.getWeatherForecastAnchorPane());
+                    forecasts.remove(forecast);
+                    mainWindow.resize(forecasts.size());
+                    break;
+                }
+            }
+        }
+
     }
 }

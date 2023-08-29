@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import pl.bernat.model.WeatherService;
 import pl.bernat.model.WeatherServiceFactory;
 import pl.bernat.model.client.WeatherApi;
@@ -50,6 +51,10 @@ public class WeatherForecastController extends BaseController implements Initial
     @FXML
     private  Label descriptionLabel;
 
+    public AnchorPane getWeatherForecastAnchorPane() {
+        return weatherForecastAnchorPane;
+    }
+
     @FXML
     private AnchorPane weatherForecastAnchorPane;
     private WeatherService weatherService = WeatherServiceFactory.createWeatherService();
@@ -77,6 +82,11 @@ public class WeatherForecastController extends BaseController implements Initial
     @FXML
     void editMainButton() {
         viewFactory.showCitySelectorWindow(id);
+    }
+    @FXML
+    void closeForecast() {
+        Stage stage = (Stage) cityNameLabel.getScene().getWindow();
+        viewFactory.closeForecast(id, stage);
     }
     public void setAnchorPaneMargin(){
         HBox.setMargin(weatherForecastAnchorPane, new Insets(0, 20, 0,0));
