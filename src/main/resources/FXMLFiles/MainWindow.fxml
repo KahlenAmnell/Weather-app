@@ -22,7 +22,7 @@
             </Label>
          </top>
          <right>
-            <Label alignment="CENTER_RIGHT" prefHeight="478.0" prefWidth="36.0" text="+" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label alignment="CENTER_RIGHT" onMouseClicked="#addForecast" prefHeight="478.0" prefWidth="36.0" text="+" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font size="40.0" />
                </font>

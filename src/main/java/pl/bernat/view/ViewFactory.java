@@ -1,6 +1,5 @@
 package pl.bernat.view;
 
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,7 +8,6 @@ import pl.bernat.controller.BaseController;
 import pl.bernat.controller.CitySelectorController;
 import pl.bernat.controller.MainWindowController;
 import pl.bernat.controller.WeatherForecastController;
-import pl.bernat.model.WeatherService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +17,7 @@ public class ViewFactory {
     private ArrayList<Stage> activeStages;
     private ArrayList<String> citiesList;
     private MainWindowController mainWindow;
+    private Object forecastRoot;
 
     public ViewFactory(ArrayList<String> citiesList) {
         this.citiesList = citiesList;
@@ -27,31 +26,18 @@ public class ViewFactory {
     }
     public void showMainWindow(){
         BaseController controller = new MainWindowController(citiesList, this, "/FXMLFiles/MainWindow.fxml");
+        mainWindow = (MainWindowController) controller;
         initializeStage(controller);
     }
     public void showCitySelectorWindow(int forecastId){
         BaseController controller = new CitySelectorController(citiesList, this, "/FXMLFiles/CitySelectorWindow.fxml", forecastId);
         initializeStage(controller);
     }
-
-    private void initializeWeatherForecastWindows(FXMLLoader weatherForecastLoader, WeatherForecastController controller, int i){
-try {
-        weatherForecastLoader.load();
-        controller.setId(i);
-        forecasts.add(controller);
-        if (i >= 1) {
-            controller.setMainCityName(citiesList.get(i-1));
-            controller.setAnchorPaneMargin();
-            controller.checkWeather();
-        } else {
-            Platform.runLater(() -> {
-                showCitySelectorWindow(controller.getId());
-            });
-        }
-} catch (IOException e){
-    e.printStackTrace();
-}
+    public void showCitySelectorWindow(){
+        BaseController controller = new CitySelectorController(citiesList, this, "/FXMLFiles/CitySelectorWindow.fxml");
+        initializeStage(controller);
     }
+
     private FXMLLoader setFxmlLoader(BaseController controller){
         FXMLLoader loader = new FXMLLoader(getClass().getResource(controller.getFxmlName()));
         loader.setController(controller);
@@ -64,12 +50,8 @@ try {
         try {
             parent = window.load();
             if(baseController.getClass() == MainWindowController.class){
-                mainWindow = (MainWindowController) baseController;
-                int i=citiesList.size();
-                do {
-                    setForecastWindows(window, i);
-                    i--;
-                } while (i > 0);
+                forecastRoot = window.getNamespace().get("weatherForecastSpace");
+                showForecasts();
             }
         } catch (IOException e){
             e.printStackTrace();
@@ -82,18 +64,45 @@ try {
         activeStages.add(stage);
     }
 
+    private void showForecasts() {
+        int i=citiesList.size();
+        do {
+            if(i==0){
+                showCitySelectorWindow(0);
+            }
+            initializeForecastWindows();
+            i--;
+        } while (i > 0);
+    }
+
     public void closeStage(Stage stageToClose){
         stageToClose.close();
         activeStages.remove(stageToClose);
     }
 
-    private void setForecastWindows(FXMLLoader mainWindow, int i) throws IOException {
+    public void initializeForecastWindows(){
         WeatherForecastController weatherController = new WeatherForecastController(citiesList, this, "/FXMLFiles/WeatherForecast.fxml");
         FXMLLoader weatherForecastLoader = setFxmlLoader(weatherController);
 
-        weatherForecastLoader.setRoot(mainWindow.getNamespace().get("weatherForecastSpace"));
+        weatherForecastLoader.setRoot(forecastRoot);
 
-        initializeWeatherForecastWindows(weatherForecastLoader, weatherController, i);
+        try{
+        weatherForecastLoader.load();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        forecasts.add(weatherController);
+        if(citiesList.get(weatherController.getId()) == null){
+            System.out.println("tutaj");
+            return;
+        }
+        if(!citiesList.isEmpty()) {
+            weatherController.setWindow(forecasts.size() - 1);
+        } else {
+            System.out.println("gowno");
+        }
+
     }
 
     public void updateCity(int forecastId, String cityName) {
@@ -106,11 +115,12 @@ try {
         }
     }
 
-    public void closeForecast(int id, Stage stage) {
+    public void closeForecast(int id) {
         if(forecasts.size()>1) {
             for (WeatherForecastController forecast : forecasts) {
                 if (id == forecast.getId()) {
                     mainWindow.getWeatherForecastSpace().getChildren().remove(forecast.getWeatherForecastAnchorPane());
+                    citiesList.remove(forecast.getMainCityName());
                     forecasts.remove(forecast);
                     mainWindow.resize(forecasts.size());
                     break;

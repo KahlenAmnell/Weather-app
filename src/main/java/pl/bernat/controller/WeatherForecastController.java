@@ -85,8 +85,7 @@ public class WeatherForecastController extends BaseController implements Initial
     }
     @FXML
     void closeForecast() {
-        Stage stage = (Stage) cityNameLabel.getScene().getWindow();
-        viewFactory.closeForecast(id, stage);
+        viewFactory.closeForecast(id);
     }
     public void setAnchorPaneMargin(){
         HBox.setMargin(weatherForecastAnchorPane, new Insets(0, 20, 0,0));
@@ -112,5 +111,13 @@ public class WeatherForecastController extends BaseController implements Initial
         cloudinessLabel.setText("Zachmurzenie: " + weather.getList()[0].getClouds().getCloudiness() + "%");
         descriptionLabel.setText(weather.getList()[0].getWeather()[0].getDescription());
         weatherIcon.setImage(new Image("http://openweathermap.org/img/w/"+ weather.getList()[0].getWeather()[0].getIcon() + ".png"));
+    }
+
+    public void setWindow(int numberOfForecast) {
+        setId(numberOfForecast);
+        String cityName = citiesList.get(numberOfForecast);
+        cityNameLabel.setText(cityName);
+        setAnchorPaneMargin();
+        checkWeather();
     }
 }
