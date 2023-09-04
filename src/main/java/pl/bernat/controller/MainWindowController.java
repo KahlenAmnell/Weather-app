@@ -1,9 +1,11 @@
 package pl.bernat.controller;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import pl.bernat.view.ViewFactory;
 
@@ -34,15 +36,20 @@ public class MainWindowController extends BaseController {
 
     @FXML
     void closeAction() {
-        Stage stage = (Stage) mainWindowAnchorPane.getScene().getWindow();
+        Stage stage = getStage();
         viewFactory.closeStage(stage);
     }
+    public Stage getStage(){
+        return (Stage) mainWindowAnchorPane.getScene().getWindow();
+    }
     public void resize(int amountOfForecasts) {
-        mainWindowAnchorPane.getScene().getWindow().setWidth(492+((385+20)*(amountOfForecasts-1)));
+        Stage stage = getStage();
+        stage.setWidth(492+((385+20)*(amountOfForecasts-1)));
     }
 
     @FXML
     void addForecast() {
         viewFactory.showCitySelectorWindow();
+        mainWindowAnchorPane.getScene().getWindow();
     }
 }

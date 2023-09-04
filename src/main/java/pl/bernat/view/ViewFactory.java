@@ -1,9 +1,12 @@
 package pl.bernat.view;
 
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import pl.bernat.controller.BaseController;
 import pl.bernat.controller.CitySelectorController;
 import pl.bernat.controller.MainWindowController;
@@ -59,6 +62,7 @@ public class ViewFactory {
         }
         Scene scene = new Scene(parent);
         Stage stage = new Stage();
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
         activeStages.add(stage);
@@ -123,16 +127,23 @@ public class ViewFactory {
                     citiesList.remove(forecast.getMainCityName());
                     forecasts.remove(forecast);
                     mainWindow.resize(forecasts.size());
+                    centerOnScreen(mainWindow.getStage());
                     break;
                 }
             }
         }
-
     }
 
     public void addNewForecast(String cityName) {
         citiesList.add(cityName);
         initializeForecastWindows();
         mainWindow.resize(forecasts.size());
+        centerOnScreen(mainWindow.getStage());
     }
+    public void centerOnScreen(Stage stage){
+        Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
+        double centerX = bounds.getMinX() + (bounds.getWidth() - stage.getWidth())/2;
+        stage.setX(centerX);
+    }
+
 }
