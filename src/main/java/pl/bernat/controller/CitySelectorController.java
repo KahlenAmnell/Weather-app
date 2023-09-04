@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class CitySelectorController extends BaseController{
     @FXML
     private TextField cityTextField;
-    private int forecastId;
+    private int forecastId = -1;
     public CitySelectorController(ArrayList<String> citiesList, ViewFactory viewFactory, String fxmlName) {
         super(citiesList, viewFactory, fxmlName);
     }
@@ -29,7 +29,11 @@ public class CitySelectorController extends BaseController{
 
     @FXML
     public void saveCityAction() {
-        viewFactory.updateCity(forecastId, getCityName());
+        if(forecastId == -1) {
+            viewFactory.addNewForecast(getCityName());
+        } else {
+            viewFactory.updateCity(forecastId, getCityName());
+        }
         closeAction();
     }
 

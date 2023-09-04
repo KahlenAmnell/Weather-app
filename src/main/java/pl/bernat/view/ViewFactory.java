@@ -129,4 +129,10 @@ public class ViewFactory {
         }
 
     }
+
+    public void addNewForecast(String cityName) {
+        citiesList.add(cityName);
+        initializeForecastWindows();
+        mainWindow.resize(forecasts.size());
+    }
 }
