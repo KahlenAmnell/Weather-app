@@ -37,7 +37,18 @@ public class FirstWeatherClient implements WeatherClient{
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            return obj;
+            if(isResponseCorrect(obj)) {
+                return obj;
+            } else {
+                return null;
+            }
+
+    }
+    private boolean isResponseCorrect(WeatherApi weatherApi){
+        if(weatherApi.getResponseCod().equals("200")){
+            return true;
+        }
+        return false;
     }
     private String replaceSpaceWithPlus(String cityName) {
         return cityName.replace(" ", "+");

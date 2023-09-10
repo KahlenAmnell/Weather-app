@@ -93,6 +93,9 @@ public class WeatherForecastController extends BaseController implements Initial
 
     public void checkWeather() {
         WeatherApi weather = weatherService.getWeather(getMainCityName());
+        if(weather == null) {
+            closeForecast();
+        }
         displayWeather(weather);
     }
     @Override

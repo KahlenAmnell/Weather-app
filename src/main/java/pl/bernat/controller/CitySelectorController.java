@@ -1,8 +1,12 @@
 package pl.bernat.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import pl.bernat.model.WeatherService;
+import pl.bernat.model.WeatherServiceFactory;
+import pl.bernat.model.client.WeatherApi;
 import pl.bernat.view.ViewFactory;
 
 import java.util.ArrayList;
@@ -10,7 +14,11 @@ import java.util.ArrayList;
 public class CitySelectorController extends BaseController{
     @FXML
     private TextField cityTextField;
+
+    @FXML
+    private Label errorLabel;
     private int forecastId = -1;
+    private WeatherService weatherService = WeatherServiceFactory.createWeatherService();
     public CitySelectorController(ArrayList<String> citiesList, ViewFactory viewFactory, String fxmlName) {
         super(citiesList, viewFactory, fxmlName);
     }
@@ -29,12 +37,18 @@ public class CitySelectorController extends BaseController{
 
     @FXML
     public void saveCityAction() {
-        if(forecastId == -1) {
-            viewFactory.addNewForecast(getCityName());
+        WeatherApi weather = weatherService.getWeather(getCityName());
+        if (weather == null) {
+            errorLabel.setVisible(true);
         } else {
-            viewFactory.updateCity(forecastId, getCityName());
+            errorLabel.setVisible(false);
+            if (forecastId == -1) {
+                viewFactory.addNewForecast(getCityName());
+            } else {
+                viewFactory.updateCity(forecastId, getCityName());
+            }
+            closeAction();
         }
-        closeAction();
     }
 
 }
