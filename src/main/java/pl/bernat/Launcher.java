@@ -20,6 +20,9 @@ public class Launcher extends Application {
         citiesList.add("Brenna");
         ViewFactory viewFactory = new ViewFactory(citiesList);
         viewFactory.showMainWindow();
+        if(citiesList.size() == 0){
+            viewFactory.showCitySelectorWindow(0);
+        }
     }
 
 

@@ -69,14 +69,11 @@ public class ViewFactory {
     }
 
     private void showForecasts() {
-        int i=citiesList.size();
+        int amountOfCities=citiesList.size();
         do {
-            if(i==0){
-                showCitySelectorWindow(0);
-            }
             initializeForecastWindows();
-            i--;
-        } while (i > 0);
+            amountOfCities--;
+        } while (amountOfCities > 0);
     }
 
     public void closeStage(Stage stageToClose){
@@ -97,14 +94,11 @@ public class ViewFactory {
         }
 
         forecasts.add(weatherController);
-        if(citiesList.get(weatherController.getId()) == null){
-            System.out.println("tutaj");
-            return;
-        }
+
         if(!citiesList.isEmpty()) {
             weatherController.setWindow(forecasts.size() - 1);
         } else {
-            System.out.println("gowno");
+               // showCitySelectorWindow(0);
         }
 
     }
