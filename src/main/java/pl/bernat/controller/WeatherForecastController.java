@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import pl.bernat.Launcher;
 import pl.bernat.model.WeatherService;
 import pl.bernat.model.WeatherServiceFactory;
 import pl.bernat.model.client.WeatherApi;
@@ -62,8 +63,8 @@ public class WeatherForecastController extends BaseController implements Initial
     @FXML
     private HBox weatherForecastHBox;
 
-    public WeatherForecastController(ArrayList<String> citiesList, ViewFactory viewFactory, String fxmlName) {
-        super(citiesList, viewFactory, fxmlName);
+    public WeatherForecastController(ViewFactory viewFactory, String fxmlName) {
+        super(viewFactory, fxmlName);
     }
     public void setMainCityName(String cityName) {
         cityNameLabel.setText(cityName);
@@ -118,7 +119,7 @@ public class WeatherForecastController extends BaseController implements Initial
 
     public void setWindow(int numberOfForecast) {
         setId(numberOfForecast);
-        String cityName = citiesList.get(numberOfForecast);
+        String cityName = Launcher.citiesList.get(numberOfForecast);
         cityNameLabel.setText(cityName);
         setAnchorPaneMargin();
         checkWeather();

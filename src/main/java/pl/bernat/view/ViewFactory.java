@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import pl.bernat.Launcher;
 import pl.bernat.controller.BaseController;
 import pl.bernat.controller.CitySelectorController;
 import pl.bernat.controller.MainWindowController;
@@ -18,26 +19,24 @@ import java.util.ArrayList;
 public class ViewFactory {
     private ArrayList<WeatherForecastController> forecasts;
     private ArrayList<Stage> activeStages;
-    private ArrayList<String> citiesList;
     private MainWindowController mainWindow;
     private Object forecastRoot;
 
-    public ViewFactory(ArrayList<String> citiesList) {
-        this.citiesList = citiesList;
+    public ViewFactory() {
         activeStages = new ArrayList<Stage>();
         forecasts = new ArrayList<WeatherForecastController>();
     }
     public void showMainWindow(){
-        BaseController controller = new MainWindowController(citiesList, this, "/FXMLFiles/MainWindow.fxml");
+        BaseController controller = new MainWindowController(this, "/FXMLFiles/MainWindow.fxml");
         mainWindow = (MainWindowController) controller;
         initializeStage(controller);
     }
     public void showCitySelectorWindow(int forecastId){
-        BaseController controller = new CitySelectorController(citiesList, this, "/FXMLFiles/CitySelectorWindow.fxml", forecastId);
+        BaseController controller = new CitySelectorController(this, "/FXMLFiles/CitySelectorWindow.fxml", forecastId);
         initializeStage(controller);
     }
     public void showCitySelectorWindow(){
-        BaseController controller = new CitySelectorController(citiesList, this, "/FXMLFiles/CitySelectorWindow.fxml");
+        BaseController controller = new CitySelectorController(this, "/FXMLFiles/CitySelectorWindow.fxml");
         initializeStage(controller);
     }
 
@@ -69,7 +68,7 @@ public class ViewFactory {
     }
 
     private void showForecasts() {
-        int amountOfCities=citiesList.size();
+        int amountOfCities= Launcher.citiesList.size();
         do {
             initializeForecastWindows();
             amountOfCities--;
@@ -82,7 +81,7 @@ public class ViewFactory {
     }
 
     public void initializeForecastWindows(){
-        WeatherForecastController weatherController = new WeatherForecastController(citiesList, this, "/FXMLFiles/WeatherForecast.fxml");
+        WeatherForecastController weatherController = new WeatherForecastController(this, "/FXMLFiles/WeatherForecast.fxml");
         FXMLLoader weatherForecastLoader = setFxmlLoader(weatherController);
 
         weatherForecastLoader.setRoot(forecastRoot);
@@ -95,7 +94,7 @@ public class ViewFactory {
 
         forecasts.add(weatherController);
 
-        if(!citiesList.isEmpty()) {
+        if(!Launcher.citiesList.isEmpty()) {
             weatherController.setWindow(forecasts.size() - 1);
         } else {
                // showCitySelectorWindow(0);
@@ -118,7 +117,7 @@ public class ViewFactory {
             for (WeatherForecastController forecast : forecasts) {
                 if (id == forecast.getId()) {
                     mainWindow.getWeatherForecastSpace().getChildren().remove(forecast.getWeatherForecastAnchorPane());
-                    citiesList.remove(forecast.getMainCityName());
+                    Launcher.citiesList.remove(forecast.getMainCityName());
                     forecasts.remove(forecast);
                     mainWindow.resize(forecasts.size());
                     centerOnScreen(mainWindow.getStage());
@@ -129,7 +128,6 @@ public class ViewFactory {
     }
 
     public void addNewForecast(String cityName) {
-        citiesList.add(cityName);
         initializeForecastWindows();
         mainWindow.resize(forecasts.size());
         centerOnScreen(mainWindow.getStage());

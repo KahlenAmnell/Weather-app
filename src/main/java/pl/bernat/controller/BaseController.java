@@ -5,7 +5,6 @@ import pl.bernat.view.ViewFactory;
 import java.util.ArrayList;
 
 public abstract class BaseController {
-    protected ArrayList<String> citiesList;
     protected ViewFactory viewFactory;
     private String fxmlName;
 
@@ -13,8 +12,7 @@ public abstract class BaseController {
         return fxmlName;
     }
 
-    public BaseController(ArrayList<String> citiesList, ViewFactory viewFactory, String fxmlName) {
-        this.citiesList = citiesList;
+    public BaseController(ViewFactory viewFactory, String fxmlName) {
         this.viewFactory = viewFactory;
         this.fxmlName = fxmlName;
     }

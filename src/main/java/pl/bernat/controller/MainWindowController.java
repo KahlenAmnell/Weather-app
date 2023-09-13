@@ -7,6 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import pl.bernat.Launcher;
 import pl.bernat.view.ViewFactory;
 
 import java.util.ArrayList;
@@ -22,8 +23,8 @@ public class MainWindowController extends BaseController {
     @FXML
     private HBox weatherForecastSpace;
 
-    public MainWindowController(ArrayList<String> citiesList, ViewFactory viewFactory, String fxmlName) {
-        super(citiesList, viewFactory, fxmlName);
+    public MainWindowController(ViewFactory viewFactory, String fxmlName) {
+        super(viewFactory, fxmlName);
     }
 
     public AnchorPane getMainWindowAnchorPane() {
@@ -36,6 +37,7 @@ public class MainWindowController extends BaseController {
 
     @FXML
     void closeAction() {
+        System.out.println(Launcher.citiesList);
         Stage stage = getStage();
         viewFactory.closeStage(stage);
     }
