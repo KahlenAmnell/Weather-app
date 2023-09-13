@@ -48,6 +48,8 @@ public class CitySelectorController extends BaseController{
                 viewFactory.addNewForecast(getCityName());
             } else {
                 viewFactory.updateCity(forecastId, getCityName());
+                Launcher.citiesList.remove(forecastId);
+
             }
             closeAction();
         }
