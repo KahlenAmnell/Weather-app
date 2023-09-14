@@ -60,6 +60,7 @@ public class ViewFactory {
             return;
         }
         Scene scene = new Scene(parent);
+        scene.getStylesheets().add("CSS/Style.css");
         Stage stage = new Stage();
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);

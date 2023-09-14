@@ -1,0 +1,19 @@
+.hoverLabel:hover{
+    -fx-font-weight:bold;
+}
+
+.editButton:hover{
+    -fx-opacity: 1;
+}
+
+.citySelectorButtons{
+    -fx-background-color: #CAF0F7;
+}
+
+.citySelectorButtons:hover{
+    -fx-background-color: #FFFFFF;
+}
+
+.citySelectorButtons:pressed{
+    -fx-font-weight:bold;
+}

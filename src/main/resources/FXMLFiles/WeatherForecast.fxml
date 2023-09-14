@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -63,15 +64,20 @@
             </GridPane>
             <VBox layoutX="345.0" layoutY="18.0" prefHeight="61.0" prefWidth="26.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#closeForecast" prefHeight="32.0" prefWidth="25.0" text="x" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#closeForecast" prefHeight="32.0" prefWidth="25.0" styleClass="hoverLabel" stylesheets="@../CSS/Style.css" text="x" textFill="WHITE">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="editMainButton" fitHeight="22.0" fitWidth="99.0" onMouseClicked="#editMainButton" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                           <Image url="@../icons/edit.png" />
-                        </image></ImageView>
+                     <StackPane opacity="0.6" prefHeight="150.0" prefWidth="200.0" styleClass="editButton" stylesheets="@../CSS/Style.css">
+                        <children>
+                        <ImageView fx:id="editMainButton" fitHeight="22.0" fitWidth="26.0" onMouseClicked="#editMainButton" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../icons/edit.png" />
+                              </image>
+                           </ImageView>
+                        </children>
+                     </StackPane>
                </children>
             </VBox>
             <Label fx:id="cityNameLabel" alignment="CENTER" layoutX="57.0" layoutY="59.0" prefHeight="55.0" prefWidth="275.0" text="Miasto" textFill="WHITE">

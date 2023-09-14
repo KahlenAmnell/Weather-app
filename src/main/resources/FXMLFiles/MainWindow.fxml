@@ -12,7 +12,7 @@
    <children>
       <BorderPane layoutX="764.0" prefHeight="550.0" prefWidth="457.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <Label fx:id="closeLabel" onMouseClicked="#closeAction" text="x" textFill="WHITE" BorderPane.alignment="CENTER_RIGHT">
+            <Label fx:id="closeLabel" onMouseClicked="#closeAction" styleClass="hoverLabel" stylesheets="@../CSS/Style.css" text="x" textFill="WHITE" BorderPane.alignment="CENTER_RIGHT">
                <font>
                   <Font size="25.0" />
                </font>
@@ -22,7 +22,7 @@
             </Label>
          </top>
          <right>
-            <Label alignment="CENTER_RIGHT" onMouseClicked="#addForecast" prefHeight="478.0" prefWidth="36.0" text="+" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label alignment="CENTER_RIGHT" onMouseClicked="#addForecast" prefHeight="478.0" prefWidth="36.0" styleClass="hoverLabel" stylesheets="@../CSS/Style.css" text="+" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font size="40.0" />
                </font>
