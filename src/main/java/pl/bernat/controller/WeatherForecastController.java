@@ -16,8 +16,7 @@ import pl.bernat.model.client.WeatherApi;
 import pl.bernat.view.ViewFactory;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class WeatherForecastController extends BaseController implements Initializable {
 
@@ -52,6 +51,46 @@ public class WeatherForecastController extends BaseController implements Initial
     @FXML
     private  Label descriptionLabel;
 
+    //next day forecast controls
+    private List<Label> dates;
+    @FXML
+    private Label date1Label;
+
+    @FXML
+    private Label date2Label;
+
+    @FXML
+    private Label date3Label;
+
+    @FXML
+    private Label date4Label;
+
+    private List<ImageView> icons;
+    @FXML
+    private ImageView icon1;
+
+    @FXML
+    private ImageView icon2;
+
+    @FXML
+    private ImageView icon3;
+
+    @FXML
+    private ImageView icon4;
+
+    private List<Label> temperatures;
+    @FXML
+    private Label temperature1Label;
+
+    @FXML
+    private Label temperature2Label;
+
+    @FXML
+    private Label temperature3Label;
+
+    @FXML
+    private Label temperature4Label;
+
     public AnchorPane getWeatherForecastAnchorPane() {
         return weatherForecastAnchorPane;
     }
@@ -65,6 +104,15 @@ public class WeatherForecastController extends BaseController implements Initial
 
     public WeatherForecastController(ViewFactory viewFactory, String fxmlName) {
         super(viewFactory, fxmlName);
+        dates = new ArrayList<Label>(Arrays.asList(
+                date1Label, date2Label, date3Label, date4Label
+        ));
+        icons = new ArrayList<ImageView>(Arrays.asList(
+                icon1, icon2, icon3, icon4
+        ));
+        temperatures = new ArrayList<Label>(Arrays.asList(
+                temperature1Label, temperature2Label, temperature3Label, temperature4Label
+        ));
     }
     public void setMainCityName(String cityName) {
         cityNameLabel.setText(cityName);
