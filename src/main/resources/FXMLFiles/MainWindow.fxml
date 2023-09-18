@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="550.0" prefWidth="420.0" style="-fx-background-color: #011638;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="mainWindowAnchorPane" prefHeight="550.0" prefWidth="457.0" style="-fx-background-color: #011638;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane layoutX="764.0" prefHeight="550.0" prefWidth="420.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane layoutX="764.0" prefHeight="550.0" prefWidth="457.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <Label fx:id="closeLabel" onMouseClicked="#closeAction" text="x" textFill="WHITE" BorderPane.alignment="CENTER_RIGHT">
+            <Label fx:id="closeLabel" onMouseClicked="#closeAction" styleClass="hoverLabel" stylesheets="@../CSS/Style.css" text="x" textFill="WHITE" BorderPane.alignment="CENTER_RIGHT">
                <font>
                   <Font size="25.0" />
                </font>
@@ -22,17 +22,17 @@
             </Label>
          </top>
          <right>
-            <Label alignment="CENTER_RIGHT" prefHeight="478.0" prefWidth="36.0" text="+" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label alignment="CENTER_RIGHT" onMouseClicked="#addForecast" prefHeight="478.0" prefWidth="36.0" styleClass="hoverLabel" stylesheets="@../CSS/Style.css" text="+" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font size="40.0" />
                </font>
             </Label>
          </right>
          <bottom>
-            <Pane prefHeight="36.0" prefWidth="36.0" BorderPane.alignment="CENTER" />
+            <Pane prefHeight="36.0" BorderPane.alignment="CENTER" />
          </bottom>
          <left>
-            <Pane prefHeight="200.0" prefWidth="36.0" BorderPane.alignment="CENTER" />
+            <Pane prefHeight="478.0" prefWidth="36.0" BorderPane.alignment="CENTER" />
          </left>
          <center>
             <HBox fx:id="weatherForecastSpace" prefHeight="550.0" prefWidth="385.0" BorderPane.alignment="CENTER" />

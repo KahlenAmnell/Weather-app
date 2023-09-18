@@ -13,6 +13,4 @@ public class WeatherService {
     public WeatherApi getWeather(String cityName) {
         return weatherClient.getWeather(cityName);
     }
-
-
 }

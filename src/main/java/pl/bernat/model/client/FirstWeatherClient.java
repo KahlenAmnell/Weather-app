@@ -13,27 +13,44 @@ public class FirstWeatherClient implements WeatherClient{
     @Override
     public WeatherApi getWeather(String cityName){
         WeatherApi obj = new WeatherApi();
-        String request = "https://api.openweathermap.org/data/2.5/forecast?appid=609312d806745e844f4bff56016e6b13&units=metric&cnt=1&lang=pl" + "&q=" + cityName;
+        
+        cityName = replaceSpaceWithPlus(cityName);
 
-        try {
-            HttpRequest httpRequest = HttpRequest.newBuilder()
-                    .uri(new URI(request))
-                    .build();
+            String request = "https://api.openweathermap.org/data/2.5/forecast?appid=609312d806745e844f4bff56016e6b13&units=metric&lang=pl" + "&q=" + cityName;
 
-            HttpClient httpClient = HttpClient.newHttpClient();
+            try {
+                HttpRequest httpRequest = HttpRequest.newBuilder()
+                        .uri(new URI(request))
+                        .build();
 
-            HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-            String result = response.body();
+                HttpClient httpClient = HttpClient.newHttpClient();
 
-            Gson gson = new Gson();
-            obj = gson.fromJson(result, WeatherApi.class);
-        } catch(IOException e){
-            e.printStackTrace();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+                HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+                String result = response.body();
+
+                Gson gson = new Gson();
+                obj = gson.fromJson(result, WeatherApi.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if(isResponseCorrect(obj)) {
+                return obj;
+            } else {
+                return null;
+            }
+
+    }
+    private boolean isResponseCorrect(WeatherApi weatherApi){
+        if(weatherApi.getResponseCod().equals("200")){
+            return true;
         }
-        return obj;
+        return false;
+    }
+    private String replaceSpaceWithPlus(String cityName) {
+        return cityName.replace(" ", "+");
     }
 }

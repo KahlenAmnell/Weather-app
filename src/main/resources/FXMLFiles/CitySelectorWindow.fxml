@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="149.0" prefWidth="339.0" style="-fx-background-color: #011638;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="149.0" prefWidth="339.0" style="-fx-background-color: #011638;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TextField fx:id="cityTextField" layoutX="14.0" layoutY="56.0" prefHeight="25.0" prefWidth="312.0" />
       <Label layoutX="116.0" layoutY="25.0" text="Wpisz miasto" textFill="WHITE">
@@ -14,7 +14,12 @@
             <Font name="Arial" size="18.0" />
          </font>
       </Label>
-      <Button layoutX="216.0" layoutY="104.0" mnemonicParsing="false" onAction="#saveCityAction" style="-fx-background-color: #CAF0F7;" text="Zapisz" />
-      <Button layoutX="275.0" layoutY="104.0" mnemonicParsing="false" onAction="#closeAction" style="-fx-background-color: #CAF0F7;" text="Anuluj" />
+      <Button layoutX="216.0" layoutY="104.0" mnemonicParsing="false" onAction="#saveCityAction" styleClass="citySelectorButtons" stylesheets="@../CSS/Style.css" text="Zapisz" />
+      <Button layoutX="275.0" layoutY="104.0" mnemonicParsing="false" onAction="#closeAction" styleClass="citySelectorButtons" stylesheets="@../CSS/Style.css" text="Anuluj" />
+      <Label fx:id="errorLabel" layoutX="13.0" layoutY="89.0" prefHeight="51.0" prefWidth="187.0" text="Błąd: Niaprawidłowa nazwa miasta" textFill="#f80000" visible="false" wrapText="true">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

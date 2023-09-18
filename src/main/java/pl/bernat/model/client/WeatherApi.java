@@ -2,6 +2,12 @@ package pl.bernat.model.client;
 import com.google.gson.annotations.SerializedName;
 
 public class WeatherApi {
+    @SerializedName("cod")
+    String responseCod;
+    public String getResponseCod() {
+        return responseCod;
+    }
+
     List list[];
     City city;
     public List[] getList() {
