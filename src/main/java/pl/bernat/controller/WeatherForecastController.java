@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import pl.bernat.Launcher;
+import pl.bernat.model.PolishDayOfWeek;
 import pl.bernat.model.WeatherService;
 import pl.bernat.model.WeatherServiceFactory;
 import pl.bernat.model.client.WeatherApi;
@@ -18,7 +19,7 @@ import pl.bernat.view.ViewFactory;
 import java.net.URL;
 import java.util.*;
 
-public class WeatherForecastController extends BaseController implements Initializable {
+public class WeatherForecastController extends BaseController {
 
     private int id;
     @FXML
@@ -52,7 +53,6 @@ public class WeatherForecastController extends BaseController implements Initial
     private  Label descriptionLabel;
 
     //next day forecast controls
-    private List<Label> dates;
     @FXML
     private Label date1Label;
 
@@ -64,8 +64,6 @@ public class WeatherForecastController extends BaseController implements Initial
 
     @FXML
     private Label date4Label;
-
-    private List<ImageView> icons;
     @FXML
     private ImageView icon1;
 
@@ -77,8 +75,6 @@ public class WeatherForecastController extends BaseController implements Initial
 
     @FXML
     private ImageView icon4;
-
-    private List<Label> temperatures;
     @FXML
     private Label temperature1Label;
 
@@ -104,15 +100,6 @@ public class WeatherForecastController extends BaseController implements Initial
 
     public WeatherForecastController(ViewFactory viewFactory, String fxmlName) {
         super(viewFactory, fxmlName);
-        dates = new ArrayList<Label>(Arrays.asList(
-                date1Label, date2Label, date3Label, date4Label
-        ));
-        icons = new ArrayList<ImageView>(Arrays.asList(
-                icon1, icon2, icon3, icon4
-        ));
-        temperatures = new ArrayList<Label>(Arrays.asList(
-                temperature1Label, temperature2Label, temperature3Label, temperature4Label
-        ));
     }
     public void setMainCityName(String cityName) {
         cityNameLabel.setText(cityName);
@@ -147,11 +134,6 @@ public class WeatherForecastController extends BaseController implements Initial
         }
         displayWeather(weather);
     }
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-/*        WeatherApi weather = weatherService.getWeather(getMainCityName());
-        displayWeather(weather);*/
-    }
 
     private void displayWeather(WeatherApi weather) {
         cityNameLabel.setText(weather.getCity().getName());
@@ -163,6 +145,16 @@ public class WeatherForecastController extends BaseController implements Initial
         cloudinessLabel.setText("Zachmurzenie: " + weather.getList()[0].getClouds().getCloudiness() + "%");
         descriptionLabel.setText(weather.getList()[0].getWeather()[0].getDescription());
         weatherIcon.setImage(new Image("http://openweathermap.org/img/w/"+ weather.getList()[0].getWeather()[0].getIcon() + ".png"));
+        nextDayForescast(weather, 8, date1Label, icon1, temperature1Label);
+        nextDayForescast(weather, 16, date2Label, icon2, temperature2Label);
+        nextDayForescast(weather, 24, date3Label, icon3, temperature3Label);
+        nextDayForescast(weather, 32, date4Label, icon4, temperature4Label);
+    }
+    private void nextDayForescast(WeatherApi weather, int dayNumberList, Label date, ImageView icon, Label temperature){
+        String nameOfDay = PolishDayOfWeek.polishName(weather.getList()[dayNumberList].getDate());
+        date.setText(nameOfDay);
+        icon.setImage(new Image("http://openweathermap.org/img/w/"+ weather.getList()[dayNumberList].getWeather()[0].getIcon() + ".png"));
+        temperature.setText(weather.getList()[dayNumberList].getMain().getTemperature() + "°C");
     }
 
     public void setWindow(int numberOfForecast) {

@@ -16,7 +16,7 @@ public class FirstWeatherClient implements WeatherClient{
         
         cityName = replaceSpaceWithPlus(cityName);
 
-            String request = "https://api.openweathermap.org/data/2.5/forecast?appid=609312d806745e844f4bff56016e6b13&units=metric&cnt=1&lang=pl" + "&q=" + cityName;
+            String request = "https://api.openweathermap.org/data/2.5/forecast?appid=609312d806745e844f4bff56016e6b13&units=metric&lang=pl" + "&q=" + cityName;
 
             try {
                 HttpRequest httpRequest = HttpRequest.newBuilder()

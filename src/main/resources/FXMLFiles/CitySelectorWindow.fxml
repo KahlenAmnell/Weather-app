@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="149.0" prefWidth="339.0" style="-fx-background-color: #011638;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="149.0" prefWidth="339.0" style="-fx-background-color: #011638;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TextField fx:id="cityTextField" layoutX="14.0" layoutY="56.0" prefHeight="25.0" prefWidth="312.0" />
       <Label layoutX="116.0" layoutY="25.0" text="Wpisz miasto" textFill="WHITE">
